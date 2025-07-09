@@ -2,6 +2,10 @@
 GET http://localhost:5000/api/rooms
 
 
+
+#create room
+
+
 ###
 POST http://localhost:5000/api/rooms
 Content-Type: application/json
@@ -82,3 +86,42 @@ Content-Type: application/json
 #delete
 #####
 DELETE http://localhost:5000/api/bookings/68590ab671d33c76e9a60ce8
+
+
+
+#get users
+####
+GET http://localhost:5000/api/users
+
+
+#create user
+###
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "name": "momo",
+    "email": "momo154@gmail.com",
+    "password": "124578"
+}
+
+
+#login user
+###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "momo154@gmail.com",
+    "password": "124578"
+}
+
+
+#logout user
+###
+http://localhost:5000/api/users/logout
+
+
+#check auth
+###
+GET http://localhost:5000/auth
