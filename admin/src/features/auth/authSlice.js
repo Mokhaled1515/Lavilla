@@ -25,6 +25,33 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+// export const loginUser = createAsyncThunk(
+//   "auth/login",
+//   async (userData, thunkApi) => {
+//     try {
+//       const res = await fetch("/api/users/login", {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         method: "POST",
+//         body: JSON.stringify(userData),
+//       });
+//       if (!res.ok) {
+//         const error = await res.json();
+//         return thunkApi.rejectWithValue(error);
+//       }
+
+//       const data = await res.json();
+//       // set the data in localStorage
+//       localStorage.setItem("user", JSON.stringify(data));
+//       return data;
+//     } catch (error) {
+//       return thunkApi.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (userData, thunkApi) => {
@@ -36,20 +63,34 @@ export const loginUser = createAsyncThunk(
         method: "POST",
         body: JSON.stringify(userData),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        return thunkApi.rejectWithValue(error);
-      }
 
       const data = await res.json();
+
+      if (!res.ok) {
+        const message = data?.message?.toLowerCase() || "login failed";
+
+        let customMessage = "Login failed";
+
+        if (message.includes("not found")) {
+          customMessage = "user not register!";
+        } else if (message.includes("invalid") || message.includes("password")) {
+          customMessage = "email and password are not same";
+        }
+
+        return thunkApi.rejectWithValue(customMessage);
+      }
+
       // set the data in localStorage
       localStorage.setItem("user", JSON.stringify(data));
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue("Something went wrong");
     }
   }
 );
+
+
+
 
 export const logoutUser = createAsyncThunk(
   "auth/logout",

@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { loginUser, reset } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isSuccess } = useSelector((state) => state.auth);
+
+  const { user, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
   const [formData, setformData] = useState({
     email: "",
     password: "",
@@ -14,13 +18,29 @@ const Login = () => {
 
   const { email, password } = formData;
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigate("/dashboard");
-      dispatch(reset());
-    }
-  }, [isSuccess, user, dispatch, navigate]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     // navigate("/dashboard");
+  //     toast.success("Login successful ✅");
+  //     navigate("/dashboard");
+  //   }
+  //   dispatch(reset());
+  // }, [isSuccess, isError, message, dispatch, navigate]);
 
+  useEffect(() => {
+    if (isSuccess && user) {
+      toast.success("Login successful ✅");
+      navigate("/dashboard");
+    }
+
+    if (isError) {
+      toast.error(message || "Login failed ❌");
+    }
+
+    dispatch(reset());
+  }, [isSuccess, isError, message, user, dispatch, navigate]);
+
+  
   const handleChange = (e) => {
     setformData((prevState) => ({
       ...prevState,

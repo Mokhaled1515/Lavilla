@@ -1,0 +1,73 @@
+#room{
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .img-wrapper{
+        width: 100%;
+        height: 50vh;
+        margin-bottom: 1rem;
+    }
+    .heading{
+        text-transform: capitalize;
+    }
+    
+    p{
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    h2{
+        margin-bottom: 1rem;
+    }
+    .text-wrapper{
+        text-align: center;
+        // a{
+        //     color: rgb(206, 116, 42);
+        //     background-color: rgba(196, 167, 70, 0.479);
+        //     padding: 0.5rem;
+        //     font-size: 1.2rem;
+        //     border-radius: 2px;
+        // }
+        
+    }
+    .cta-wrapper{
+        margin-top: 1rem;
+        padding-bottom: 2rem;
+display: flex;
+  justify-content: center;
+  gap: 1rem; // عشان في مسافة بين الزرين
+       a {
+        display: inline-block;
+        padding: 1rem 1rem;
+        // padding:  0.3rem 0.5rem ;
+        background-color: black ;
+        color: white;
+        margin-right: 1rem;
+        font-size: 18px;
+        cursor: pointer;
+       }
+       
+
+       button{
+        background-color: red;
+        outline: none;
+        border: none;
+        padding:  0.3rem 0.5rem;
+        color:  white;
+        font-weight: 500;
+        font-size: 18px !important;
+        cursor: pointer;
+
+       }
+
+    }
+    
+  
+    @media (min-width:200px) and (max-width:500px) {
+        .img-wrapper{
+        width: 100%;
+        height: 30vh;
+    }
+    }
+}

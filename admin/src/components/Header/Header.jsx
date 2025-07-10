@@ -9,7 +9,6 @@ const Header = () => {
   const handleLogout = async () => {
     dispatch(logoutUser());
     dispatch(reset());
-    
   };
   return (
     <header className="main-header text-center">
@@ -20,6 +19,7 @@ const Header = () => {
 
         <nav className="">
           <Link to="/">Home</Link>
+          <Link to="/rooms">Rooms</Link>
           {user ? (
             <>
               <Link to="/rooms/create">Create</Link>
