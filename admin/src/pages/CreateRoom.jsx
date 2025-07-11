@@ -15,7 +15,7 @@ const CreateRoom = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { isSuccess } = useSelector((state) => state.room);
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     name: "test",
     price: 2000,
@@ -83,37 +83,6 @@ const CreateRoom = () => {
     setPreviewImages(previews);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!name || !price || !roomsNumbers) {
-  //     return;
-  //   }
-  //   const roomArray = roomsNumbers.split(",").map((item) => {
-  //     return {
-  //       number: parseInt(item),
-  //       unavailableDates: [],
-  //     };
-  //   });
-  //   let list = [];
-  //   list = await Promise.all(
-  //     Object.values(files).map(async (file) => {
-  //       const url = await uploadImage(file);
-  //       return url;
-  //     })
-  //   );
-  //   const dataToSubmit = {
-  //     name,
-  //     price,
-  //     desc,
-  //     roomsNumbers: roomArray,
-  //     img: list,
-  //   };
-
-  //   //dispatch createRoom function
-  //   dispatch(createRoom(dataToSubmit));
-  //   // let dataToSubmit = { name, price, desc, roomsNumbers, img };
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

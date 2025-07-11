@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteRoom, reset } from "../../features/room/roomSlice";
+import Carousel from "../../components/Carousel/Carousel";
 
 const Room = () => {
   const { user } = useSelector((state) => state.auth);
@@ -41,66 +42,22 @@ const Room = () => {
     dispatch(deleteRoom(id));
   };
 
-  //   return (
-  //     <div id="room">
-  //       <div className="container">
-  //         {room ? (
-  //           <div>
-  //             <div className="img-wrapper">
-  //               {/* <img src={room.img[0]} alt="" /> */}
-  //               <img
-  //                 src={
-  //                   room.img && room.img.length > 0
-  //                     ? room.img[0]
-  //                     : // : "/rag-doll-sitting-large-question-mark.jpg"
-  //                       "/not-or.png"
-  //                 }
-  //                 alt={room.name}
-  //                 loading="lazy"
-  //               />
-  //             </div>
-  //             <div className="text-wrapper">
-  //               <h1 className="heading center">{room.name}</h1>
-  //               <p>{room.desc}</p>
-  //               <h2>${room.price.toFixed(2)}</h2>
-  //               <div className="cta-wrapper">
-  //                 <Link to={`/edit/rooms/${room._id}`}>Edit Room</Link>
-
-  //                 {/* {user.isAdmin ? <button onClick={handleDelete}>Delete Room</button> : "don't show"} */}
-  //                 {user?.isAdmin && (
-  //                   <button onClick={handleDelete}>Delete Room</button>
-  //                 )}
-  //               </div>
-  //             </div>
-  //           </div>
-  //         ) : null}
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
   return (
     <div id="room">
       <div className="container">
         {room ? (
           <div>
             <div className="img-wrapper">
-              {/* <img src={room.img[0]} alt="" /> */}
-              <img
-                src={
-                  room.img && room.img.length > 0
-                    ? room.img[0]
-                    : // : "/rag-doll-sitting-large-question-mark.jpg"
-                      "/not-or.png"
+              <Carousel
+                data={
+                  room.img && room.img.length > 0 ? room.img : ["/not-or.png"]
                 }
-                alt={room.name}
-                loading="lazy"
               />
             </div>
             <div className="text-wrapper">
-              <h1 className="heading center"> {room.name} </h1>
-              <p> {room.desc} </p>
-              <h2> ${room.price.toFixed(2)} </h2>
+              <h1 className="heading center">{room.name}</h1>
+              <p>{room.desc}</p>
+              <h2>${room.price.toFixed(2)}</h2>
             </div>
 
             {user && user.isAdmin ? (
